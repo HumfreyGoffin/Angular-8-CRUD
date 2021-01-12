@@ -12,7 +12,6 @@ export class ConfigService {
 	constructor() {
 		this.apiURL = 'http://localhost/saNG4-Demo-App/api/';
 	}
-
 }
 
 export class ValidationService {
@@ -45,8 +44,6 @@ export class ValidationService {
 		};
 	}
 }
-
-
 
 export function routerTransition() {
 	return slideToLeft();

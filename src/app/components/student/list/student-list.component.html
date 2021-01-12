@@ -2,7 +2,7 @@
 
 <div class="w3-container" *ngIf="studentListData">
 	<div class="w3-panel w3-round-small w3-teal">
-		<h3>Student List <button routerLink="/add" class="w3-button w3-green custom-button"><i class="w3-medium  fa fa-plus"></i> Add New Student</button></h3>
+		<h3>Student List <button routerLink="/add" id='new-student-button' class="w3-button w3-green custom-button"><i class="w3-medium  fa fa-plus"></i> Add New Student</button></h3>
 	</div>
 	<span><i class="w3-medium fa fa-search"></i> Search : <input class="" type="text" [(ngModel)]='filterData'></span>
 
@@ -11,7 +11,7 @@
 		<p>No students found <span *ngIf="filterData"> with search "{{filterData}}"</span> </p>
 	</div>
 	<div class="w3-panel w3-light-grey w3-padding-16 w3-card-2" *ngIf="(studentListData | filter:filterData | filter:filterData).length != 0">
-		<table class="w3-table w3-striped w3-bordered">
+		<table class="w3-table w3-striped w3-bordered" id="student-table">
 			<tr>
 				<th><i class="w3-medium custom-icon fa fa-refresh"></i> Sr. No.</th>
 				<!-- <th>ID</th> -->
