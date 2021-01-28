@@ -1,18 +1,16 @@
 /// <reference types="cypress" />
 
 context('workspace-project App', () => {
-  before(() => {
+  beforeEach(() => {
     cy.viewport(1200, 800);
     cy.visit('http://localhost:4200');
-  });
 
-  it('sanity', () => {
-    // Log in
     cy.get('#username').type('admin@yopmail.com');
     cy.get('#password').type('admin123');
     cy.get('#login-button').click();
+  });
 
-    // Assert Table Headers
+  it('should show the expected table headers', () => {
     const expectedTableHeaders = ['Sr. No.', 'First Name', 'Last Name', 'Email', 'Phone', 'Update', 'Delete'];
     cy.get('#student-table > tr')
       .first()
@@ -20,8 +18,9 @@ context('workspace-project App', () => {
       expect(th).to.match('th');
       expect(th).to.contain(expectedTableHeaders[index]);
     });
+  });
 
-    // Assert Table Values
+  it('should show the expected initial table values', () => {
     const expectedTableValues = [
       ['1', 'Sangwin', 'Gawande', 'sangwin@yopmail.com', '+91-9503733178', "Update", 'Delete'],
       ['2', 'Oman', 'Umir', 'oman@yopmail.com', '+91-8574889658', "Update", 'Delete'],
@@ -36,8 +35,9 @@ context('workspace-project App', () => {
         expect(td).to.contain(expectedRowValues[tdIndex]);
       });
     });
+  });
 
-    // New Student
+  it('should submit a new student', () => {
     cy.get('#new-student-button').click();
     cy.get('#first-name').type('Albert');
     cy.get('#last-name').type('Einstein');
@@ -45,7 +45,6 @@ context('workspace-project App', () => {
     cy.get('#phone').type('9999999999');
     cy.get('#submit-new-student').click();
 
-    // Assert New Table Values
     const expectedNewTableValues = [
       ['1', 'Albert', 'Einstein', 'Albert.Einstein@gmail.com', '+91-9999999999', "Update", 'Delete'],
       ['2', 'Sangwin', 'Gawande', 'sangwin@yopmail.com', '+91-9503733178', "Update", 'Delete'],
@@ -61,9 +60,9 @@ context('workspace-project App', () => {
         expect(td).to.contain(expectedRowValues[tdIndex]);
       });
     });
-
-    // Log Out
-    cy.get('#logout').click();
   });
 
+  it('should log out', () => {
+    cy.get('#logout').click();
+  });
 });
