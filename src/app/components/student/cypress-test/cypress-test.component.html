@@ -1,0 +1,33 @@
+<div class="w3-container">
+  <br>
+  <br>
+  <br>
+  <br>
+  <label class="w3-text-blue"><img src="../../../../assets/images/pokeball.svg" height="24" width="24"/><b> Search for
+    pokemons</b></label>
+  <input class="w3-input w3-border" type="text" id="search" #input (keydown.enter)="searchForPokemon(input.value)">
+
+  <table class="w3-table w3-striped w3-bordered" id="student-table">
+    <tr>
+      <th>Pokemon Name</th>
+      <th>Pokemon Order</th>
+      <th>Pokemon Order</th>
+    </tr>
+    <tr>
+      <td>{{pokemon?.name}}</td>
+      <td>{{pokemon?.order}}</td>
+      <td><img [src]="pokemon?.sprites?.front_default" height="80"></td>
+    </tr>
+  </table>
+
+  <br>
+  <br>
+
+  <h3>Some Pokemons:</h3>
+  <ul>
+    <li>Ditto</li>
+    <li>Pikachu</li>
+    <li>Eevee</li>
+  </ul>
+</div>
+

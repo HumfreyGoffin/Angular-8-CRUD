@@ -69,7 +69,8 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "Angular-V8-CRUD:build"
+            "browserTarget": "Angular-V8-CRUD:build",
+            "proxyConfig": "./src/proxy.conf.json"
           },
           "configurations": {
             "production": {

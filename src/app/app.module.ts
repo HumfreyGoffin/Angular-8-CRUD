@@ -27,6 +27,7 @@ import { LoginComponent } from './components/login/login.component';
 import { HomeComponent, homeChildRoutes } from './components/home/home.component';
 import { HighlightStudentDirective } from './directives/highlight-student.directive';
 import { AppRoutingModule } from './app-routing.module';
+import {CypressTestComponent} from "./components/student/cypress-test/cypress-test.component";
 
 
 
@@ -41,7 +42,8 @@ import { AppRoutingModule } from './app-routing.module';
 		HomeComponent,
 		FilterPipe,
 		PhonePipe,
-		HighlightStudentDirective
+		HighlightStudentDirective,
+    CypressTestComponent
 	],
 	imports: [
 		BrowserModule,
@@ -49,6 +51,7 @@ import { AppRoutingModule } from './app-routing.module';
 		AppRoutingModule,
 		FormsModule,
 		ReactiveFormsModule,
+    HttpClientModule,
 		BrowserAnimationsModule,
 		ToastrModule.forRoot({
 			timeOut: 3000,

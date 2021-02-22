@@ -22,8 +22,7 @@
 		<input class="w3-input w3-border" type="number" formControlName="phone" id="phone">
 		<div class="w3-panel w3-red"  *ngIf="studentAddForm.controls.phone.invalid && (studentAddForm.controls.phone.dirty || studentAddForm.controls.phone.touched)">Please enter valid phone number</div> 
 		<br>
-		<button class="w3-btn w3-blue" id="submit-new-student" type="submit" [disabled]="!studentAddForm.valid"><span *ngIf="index === undefined">Register</span><span *ngIf="index != undefined">Update</span> <i class="w3-medium fa fa-check"></i> </button>
-
+²
 	</form>
 </div>
 
