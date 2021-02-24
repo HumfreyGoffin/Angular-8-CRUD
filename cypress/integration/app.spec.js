@@ -67,43 +67,55 @@ context('workspace-project App', () => {
   });
 
   it('should stub Pokémon API', () => {
-    let secondCall = false;
-    const firstResponse = {
+    let secondDittoCall = false;
+    const dittoResponse = {
+      name: 'Ditto',
+      order: 'StubbedDitto1',
+      sprites: {
+        'front_default': 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/132.png'
+      }
+    }
+    const pikachuResponse = {
       name: 'Pikachu',
-      order: 'Stubbed1',
+      order: 'StubbedPikachu',
       sprites: {
         'front_default': 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png'
       }
     }
-    const secondResponse = {
-      name: 'Crustle',
-      order: 'Stubbed2',
+    const crustleResponse = {
+      name: 'Dwebble',
+      order: 'StubbedDitto2',
       sprites: {
-        'front_default': 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/558.png'
+        'front_default': 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/557.png'
       }
     }
 
-    cy.get('#cypress-test').click();
-
-    cy.intercept('GET', '/api/v2/pokemon', (req) => req.reply((res) => {
-      if (secondCall) {
-        res.send(secondResponse);
+    cy.intercept('GET', '/api/v2/pokemon/pikachu', pikachuResponse).as('getPikachu');
+    cy.intercept('GET', '/api/v2/pokemon/ditto', (req) => req.reply((res) => {
+      if (secondDittoCall) {
+        res.send(crustleResponse);
       } else {
-        secondCall = true;
-        res.send(firstResponse);
+        secondDittoCall = true;
+        res.send(dittoResponse);
       }
-    })).as('getPokemon');
+    })).as('getDitto');
 
-    cy.get('#search').type('1{enter}');
-    cy.wait('@getPokemon');
-    cy.get('#pokemon_name_value').should('have.text', firstResponse.name);
-    cy.get('#pokemon_order_value').should('have.text', firstResponse.order);
-    cy.get('#pokemon_image_value > img').should('have.attr', 'src', firstResponse.sprites.front_default);
+    cy.get('#cypress-test').click();
+    cy.wait('@getDitto');
+    cy.get('#pokemon_name_value').should('have.text', dittoResponse.name);
+    cy.get('#pokemon_order_value').should('have.text', dittoResponse.order);
+    cy.get('#pokemon_image_value > img').should('have.attr', 'src', dittoResponse.sprites.front_default);
 
-    cy.get('#search').clear().type('2{enter}');
-    cy.wait('@getPokemon');
-    cy.get('#pokemon_name_value').should('have.text', secondResponse.name);
-    cy.get('#pokemon_order_value').should('have.text', secondResponse.order);
-    cy.get('#pokemon_image_value > img').should('have.attr', 'src', secondResponse.sprites.front_default);
+    cy.get('#search').type('pikachu{enter}');
+    cy.wait('@getPikachu');
+    cy.get('#pokemon_name_value').should('have.text', pikachuResponse.name);
+    cy.get('#pokemon_order_value').should('have.text', pikachuResponse.order);
+    cy.get('#pokemon_image_value > img').should('have.attr', 'src', pikachuResponse.sprites.front_default);
+
+    cy.get('#search').clear().type('ditto{enter}');
+    cy.wait('@getDitto');
+    cy.get('#pokemon_name_value').should('have.text', crustleResponse.name);
+    cy.get('#pokemon_order_value').should('have.text', crustleResponse.order);
+    cy.get('#pokemon_image_value > img').should('have.attr', 'src', crustleResponse.sprites.front_default);
   });
 });
