@@ -65,4 +65,45 @@ context('workspace-project App', () => {
   it('should log out', () => {
     cy.get('#logout').click();
   });
+
+  it('should stub Pokémon API', () => {
+    let secondCall = false;
+    const firstResponse = {
+      name: 'Pikachu',
+      order: 'Stubbed1',
+      sprites: {
+        'front_default': 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png'
+      }
+    }
+    const secondResponse = {
+      name: 'Crustle',
+      order: 'Stubbed2',
+      sprites: {
+        'front_default': 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/558.png'
+      }
+    }
+
+    cy.get('#cypress-test').click();
+
+    cy.intercept('GET', '/api/v2/pokemon', (req) => req.reply((res) => {
+      if (secondCall) {
+        res.send(secondResponse);
+      } else {
+        secondCall = true;
+        res.send(firstResponse);
+      }
+    })).as('getPokemon');
+
+    cy.get('#search').type('1{enter}');
+    cy.wait('@getPokemon');
+    cy.get('#pokemon_name_value').should('have.text', firstResponse.name);
+    cy.get('#pokemon_order_value').should('have.text', firstResponse.order);
+    cy.get('#pokemon_image_value > img').should('have.attr', 'src', firstResponse.sprites.front_default);
+
+    cy.get('#search').clear().type('2{enter}');
+    cy.wait('@getPokemon');
+    cy.get('#pokemon_name_value').should('have.text', secondResponse.name);
+    cy.get('#pokemon_order_value').should('have.text', secondResponse.order);
+    cy.get('#pokemon_image_value > img').should('have.attr', 'src', secondResponse.sprites.front_default);
+  });
 });
