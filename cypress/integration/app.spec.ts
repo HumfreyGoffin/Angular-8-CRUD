@@ -22,11 +22,11 @@ context('workspace-project App', () => {
 
   it('should show the expected initial table values', () => {
     const expectedTableValues = [
-      ['1', 'Sangwin', 'Gawande', 'sangwin@yopmail.com', '+91-9503733178', "Update", 'Delete'],
-      ['2', 'Oman', 'Umir', 'oman@yopmail.com', '+91-8574889658', "Update", 'Delete'],
-      ['3', 'Tina', 'Dillon', 'tina@yopmail.com', '+91-7485889658', "Update", 'Delete'],
-      ['4', 'John', 'Doe', 'john@yopmail.com', '+91-9685589748', "Update", 'Delete'],
-      ['5', 'Peter', 'Parker', 'peter@yopmail.com', '+91-8595856547', "Update", 'Delete']
+      ['1', 'Sangwin', 'Gawande', 'sangwin@yopmail.com', '+91-9503733178', 'Update', 'Delete'],
+      ['2', 'Oman', 'Umir', 'oman@yopmail.com', '+91-8574889658', 'Update', 'Delete'],
+      ['3', 'Tina', 'Dillon', 'tina@yopmail.com', '+91-7485889658', 'Update', 'Delete'],
+      ['4', 'John', 'Doe', 'john@yopmail.com', '+91-9685589748', 'Update', 'Delete'],
+      ['5', 'Peter', 'Parker', 'peter@yopmail.com', '+91-8595856547', 'Update', 'Delete']
     ];
     expectedTableValues.forEach((expectedRowValues, rowValueIndex) => {
       cy.get('#student-table > tr').eq(rowValueIndex + 1)
@@ -46,12 +46,12 @@ context('workspace-project App', () => {
     cy.get('#submit-new-student').click();
 
     const expectedNewTableValues = [
-      ['1', 'Albert', 'Einstein', 'Albert.Einstein@gmail.com', '+91-9999999999', "Update", 'Delete'],
-      ['2', 'Sangwin', 'Gawande', 'sangwin@yopmail.com', '+91-9503733178', "Update", 'Delete'],
-      ['3', 'Oman', 'Umir', 'oman@yopmail.com', '+91-8574889658', "Update", 'Delete'],
-      ['4', 'Tina', 'Dillon', 'tina@yopmail.com', '+91-7485889658', "Update", 'Delete'],
-      ['5', 'John', 'Doe', 'john@yopmail.com', '+91-9685589748', "Update", 'Delete'],
-      ['6', 'Peter', 'Parker', 'peter@yopmail.com', '+91-8595856547', "Update", 'Delete']
+      ['1', 'Albert', 'Einstein', 'Albert.Einstein@gmail.com', '+91-9999999999', 'Update', 'Delete'],
+      ['2', 'Sangwin', 'Gawande', 'sangwin@yopmail.com', '+91-9503733178', 'Update', 'Delete'],
+      ['3', 'Oman', 'Umir', 'oman@yopmail.com', '+91-8574889658', 'Update', 'Delete'],
+      ['4', 'Tina', 'Dillon', 'tina@yopmail.com', '+91-7485889658', 'Update', 'Delete'],
+      ['5', 'John', 'Doe', 'john@yopmail.com', '+91-9685589748', 'Update', 'Delete'],
+      ['6', 'Peter', 'Parker', 'peter@yopmail.com', '+91-8595856547', 'Update', 'Delete']
     ];
     expectedNewTableValues.forEach((expectedRowValues, rowValueIndex) => {
       cy.get('#student-table > tr').eq(rowValueIndex + 1)
@@ -72,23 +72,23 @@ context('workspace-project App', () => {
       name: 'Ditto',
       order: 'StubbedDitto1',
       sprites: {
-        'front_default': 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/132.png'
+        front_default: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/132.png'
       }
-    }
+    };
     const pikachuResponse = {
       name: 'Pikachu',
       order: 'StubbedPikachu',
       sprites: {
-        'front_default': 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png'
+        front_default: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png'
       }
-    }
+    };
     const crustleResponse = {
       name: 'Dwebble',
       order: 'StubbedDitto2',
       sprites: {
-        'front_default': 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/557.png'
+        front_default: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/557.png'
       }
-    }
+    };
 
     cy.intercept('GET', '/api/v2/pokemon/pikachu', pikachuResponse).as('getPikachu');
     cy.intercept('GET', '/api/v2/pokemon/ditto', (req) => req.reply((res) => {
