@@ -28,13 +28,9 @@ context('workspace-project App', () => {
       ['4', 'John', 'Doe', 'john@yopmail.com', '+91-9685589748', 'Update', 'Delete'],
       ['5', 'Peter', 'Parker', 'peter@yopmail.com', '+91-8595856547', 'Update', 'Delete']
     ];
-    expectedTableValues.forEach((expectedRowValues, rowValueIndex) => {
-      cy.get('#student-table > tr').eq(rowValueIndex + 1)
-        .children().each((td, tdIndex) => {
-        expect(td).to.match('td');
-        expect(td).to.contain(expectedRowValues[tdIndex]);
-      });
-    });
+
+    const flatten = expectedTableValues.reduce((acc, val) => acc.concat(val), []);
+    cy.assertTable("student-table", flatten);
   });
 
   it('should submit a new student', () => {
@@ -53,13 +49,9 @@ context('workspace-project App', () => {
       ['5', 'John', 'Doe', 'john@yopmail.com', '+91-9685589748', 'Update', 'Delete'],
       ['6', 'Peter', 'Parker', 'peter@yopmail.com', '+91-8595856547', 'Update', 'Delete']
     ];
-    expectedNewTableValues.forEach((expectedRowValues, rowValueIndex) => {
-      cy.get('#student-table > tr').eq(rowValueIndex + 1)
-        .children().each((td, tdIndex) => {
-        expect(td).to.match('td');
-        expect(td).to.contain(expectedRowValues[tdIndex]);
-      });
-    });
+
+    const flatten = expectedNewTableValues.reduce((acc, val) => acc.concat(val), []);
+    cy.assertTable("student-table", flatten);
   });
 
   it('should log out', () => {

@@ -22,6 +22,7 @@
       "dom"
     ]
   },
+  "include": ["**/*.ts"],
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,
     "strictInjectionParameters": true

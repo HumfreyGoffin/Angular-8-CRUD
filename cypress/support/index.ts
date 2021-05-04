@@ -13,8 +13,20 @@
 // https://on.cypress.io/configuration
 // ***********************************************************
 
-// Import commands.js using ES2015 syntax:
+// Import commands.ts using ES2015 syntax:
 import './commands'
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
+
+
+declare namespace Cypress {
+  interface Chainable<Subject> {
+    /**
+     * Create several Todo items via UI
+     * @example
+     * cy.createDefaultTodos()
+     */
+    assertTable(id: String, flattenTable: string[]): Chainable<any>
+  }
+}
