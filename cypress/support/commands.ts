@@ -24,16 +24,15 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 
-
 declare namespace Cypress {
   interface Chainable<Subject> {
-    assertTable(id: String, flattenTable: string[]): Chainable<void>
+    assertTable(id: string, flattenTable: string[]): Chainable<void>;
   }
 }
 
-Cypress.Commands.add("assertTable", (id: String, flattenTable: string[]) => {
-  cy.get("#" + id).children("tr").children("td")
+Cypress.Commands.add('assertTable', (id: String, flattenTable: string[]) => {
+  cy.get('#' + id).children('tr').children('td')
     .each((tdElements, index) => {
-      expect(tdElements.text().trim()).eq(flattenTable[index])
-    })
+      expect(tdElements.text().trim()).eq(flattenTable[index]);
+    });
 });

@@ -30,7 +30,7 @@ context('workspace-project App', () => {
     ];
 
     const flatten = expectedTableValues.reduce((acc, val) => acc.concat(val), []);
-    cy.assertTable("student-table", flatten);
+    cy.assertTable('student-table', flatten);
   });
 
   it('should submit a new student', () => {
@@ -51,7 +51,7 @@ context('workspace-project App', () => {
     ];
 
     const flatten = expectedNewTableValues.reduce((acc, val) => acc.concat(val), []);
-    cy.assertTable("student-table", flatten);
+    cy.assertTable('student-table', flatten);
   });
 
   it('should log out', () => {
